@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/formo4ka/static/css/main.7e38c7b4.css",
+    "main.js": "/formo4ka/static/js/main.86931e0c.js",
+    "index.html": "/formo4ka/index.html",
+    "main.7e38c7b4.css.map": "/formo4ka/static/css/main.7e38c7b4.css.map",
+    "main.86931e0c.js.map": "/formo4ka/static/js/main.86931e0c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7e38c7b4.css",
+    "static/js/main.86931e0c.js"
+  ]
+}
