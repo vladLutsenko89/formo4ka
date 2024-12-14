@@ -2,7 +2,7 @@
   "name": "formo4ka",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vladLutsenko89.github.io/formo4ka",
+  "homepage": "https://vladlutsenko89.github.io/formo4ka",
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",

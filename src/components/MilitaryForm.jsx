@@ -14,8 +14,7 @@ import { placeOptions, statusOptions } from '../data/peremishchennia';
 import Loader from './Loader';
 import '../styles/MilitaryForm.css';
 
-const SERVER_URL =
-  'https://cb3a-2a0d-3344-1e00-e210-793a-18a1-b5de-c08e.ngrok-free.app/shtatka/peremishchennia';
+const SERVER_URL = 'http://localhost:3000/shtatka/peremishchennia';
 
 const MilitaryForm = () => {
   const dispatch = useDispatch();
