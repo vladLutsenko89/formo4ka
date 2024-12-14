@@ -15,7 +15,7 @@ import Loader from './Loader';
 import '../styles/MilitaryForm.css';
 
 const SERVER_URL =
-  'https://1a40-2a0d-3344-1e00-e210-793a-18a1-b5de-c08e.ngrok-free.app/shtatka/peremishchennia';
+  'https://cb3a-2a0d-3344-1e00-e210-793a-18a1-b5de-c08e.ngrok-free.app/shtatka/peremishchennia';
 
 const MilitaryForm = () => {
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ const MilitaryForm = () => {
         .map((line) => line.trim())
         .filter((line) => line.length > 0);
 
-      console.log('Data array:', ipns);
+      console.log('Data array: ', ipns);
 
       const requestResult = await axios.put(SERVER_URL, {
         ipns,
