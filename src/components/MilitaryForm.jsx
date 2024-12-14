@@ -47,7 +47,7 @@ const MilitaryForm = () => {
         .map((line) => line.trim())
         .filter((line) => line.length > 0);
 
-      console.log('Data array: ', ipns);
+      console.log('Data array:', ipns);
 
       const requestResult = await axios.put(SERVER_URL, {
         ipns,
