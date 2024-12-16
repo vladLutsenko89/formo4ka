@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/formo4ka/static/css/main.7e38c7b4.css",
-    "main.js": "/formo4ka/static/js/main.86931e0c.js",
+    "main.css": "/formo4ka/static/css/main.8ac085d4.css",
+    "main.js": "/formo4ka/static/js/main.c2a5d89b.js",
+    "static/media/prapor-148.png": "/formo4ka/static/media/prapor-148.2fdc91615b15a4c647da.png",
     "index.html": "/formo4ka/index.html",
-    "main.7e38c7b4.css.map": "/formo4ka/static/css/main.7e38c7b4.css.map",
-    "main.86931e0c.js.map": "/formo4ka/static/js/main.86931e0c.js.map"
+    "main.8ac085d4.css.map": "/formo4ka/static/css/main.8ac085d4.css.map",
+    "main.c2a5d89b.js.map": "/formo4ka/static/js/main.c2a5d89b.js.map"
   },
   "entrypoints": [
-    "static/css/main.7e38c7b4.css",
-    "static/js/main.86931e0c.js"
+    "static/css/main.8ac085d4.css",
+    "static/js/main.c2a5d89b.js"
   ]
 }
