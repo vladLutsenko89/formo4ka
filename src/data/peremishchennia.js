@@ -32,7 +32,7 @@ export const placeOptions = [
   { value: 'У розпорядженні КДШВ', label: 'У розпорядженні КДШВ' },
   { value: 'У розпорядженні (ПВС)', label: 'У розпорядженні (ПВС)' },
   { value: 'арешт', label: 'арешт' },
-];
+].sort((a, b) => a.value.localeCompare(b.value));
 
 export const statusOptions = [
   { value: 'А0339', label: 'А0339' },
@@ -86,4 +86,4 @@ export const statusOptions = [
     value: "Відпустка за станом здоров'я 300",
     label: "Відпустка за станом здоров'я 300",
   },
-];
+].sort((a, b) => a.value.localeCompare(b.value));

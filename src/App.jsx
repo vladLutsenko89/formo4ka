@@ -1,12 +1,27 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import { store } from './store/store';
-import MilitaryForm from './components/MilitaryForm';
+import Layout from './components/Layout';
+import Main from './components/Main';
+import Peremishchennia from './components/Peremishchennia';
+import AboutPage from './components/AboutPage';
+import ContactsPage from './components/ContactsPage';
 
 function App() {
   return (
     <Provider store={store}>
-      <MilitaryForm />
+      <BrowserRouter basename="/formo4ka">
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/peremishchennia" element={<Peremishchennia />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contacts" element={<ContactsPage />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
     </Provider>
   );
 }

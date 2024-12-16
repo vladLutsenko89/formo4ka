@@ -13,7 +13,9 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
-    "react-scripts": "5.0.1"
+    "react-router-dom": "^7.0.2",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.9.0"
   },
   "scripts": {
     "start": "set PORT=3006 && react-scripts start",
@@ -21,7 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build --repo git@github.com:vladLutsenko89/formo4ka.git"
+    "deploy": "gh-pages -d build --repo https://github.com/vladLutsenko89/formo4ka.git"
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +45,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "cross-env": "^7.0.3",
     "gh-pages": "^6.2.0"
   }
 }

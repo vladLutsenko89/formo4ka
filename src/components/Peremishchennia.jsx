@@ -1,7 +1,10 @@
-import React from 'react';
+import _ from 'lodash';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Select from 'react-select';
 import axios from 'axios';
 
+import Loader from './Loader';
 import {
   updateInput,
   updateSelect,
@@ -11,23 +14,27 @@ import {
   resetForm,
 } from '../reducers/form-reducer';
 import { placeOptions, statusOptions } from '../data/peremishchennia';
-import Loader from './Loader';
-import '../styles/MilitaryForm.css';
+import { customSelectStyles } from '../styles/SelectStyles';
+import '../styles/Peremishchennia.css';
 
 const SERVER_URL = 'http://localhost:3000/shtatka/peremishchennia';
 
-const MilitaryForm = () => {
+const Peremishchennia = () => {
   const dispatch = useDispatch();
   const { input, place, status, isLoading, result } = useSelector(
     (state) => state.form,
   );
 
+  useEffect(() => {
+    dispatch(resetForm());
+  }, [dispatch]);
+
   const handleInputChange = (value) => {
     dispatch(updateInput(value));
   };
 
-  const handleSelectChange = (field, value) => {
-    dispatch(updateSelect({ field, value }));
+  const handleSelectChange = (field, selectedOption) => {
+    dispatch(updateSelect({ field, value: selectedOption?.value || '' }));
   };
 
   const handleCloseModal = () => {
@@ -39,16 +46,16 @@ const MilitaryForm = () => {
     e.preventDefault();
     dispatch(setLoading(true));
 
+    let requestResult;
     try {
-      // перетворюємо текст в масив, видаляємо порожні рядки
       const ipns = input
         .split('\n')
         .map((line) => line.trim())
-        .filter((line) => line.length > 0);
+        .filter((line) => !!line.length);
 
-      console.log('Data array:', ipns);
+      console.log('Data array:', ipns, place, status);
 
-      const requestResult = await axios.put(SERVER_URL, {
+      requestResult = await axios.put(SERVER_URL, {
         ipns,
         place,
         status,
@@ -59,7 +66,7 @@ const MilitaryForm = () => {
       dispatch(
         setResult({
           success: true,
-          message: requestResult.message,
+          message: _.get(requestResult, 'message'),
         }),
       );
     } catch (error) {
@@ -67,7 +74,8 @@ const MilitaryForm = () => {
       dispatch(
         setResult({
           success: false,
-          message: 'Помилка виконання операції',
+          message:
+            _.get(requestResult, 'message') || 'Помилка виконання операції',
         }),
       );
     } finally {
@@ -110,33 +118,29 @@ const MilitaryForm = () => {
         </div>
 
         <div className="form-group">
-          <select
-            value={place}
-            onChange={(e) => handleSelectChange('place', e.target.value)}
-            className="form-input"
-          >
-            <option value="">вибери місце знаходження</option>
-            {placeOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+          <Select
+            value={placeOptions.find((opt) => opt.value === place)}
+            onChange={(option) => handleSelectChange('place', option)}
+            options={placeOptions}
+            styles={customSelectStyles}
+            placeholder="вибери місце знаходження"
+            className="form-select"
+            isClearable
+            menuPlacement="top"
+          />
         </div>
 
         <div className="form-group">
-          <select
-            value={status}
-            onChange={(e) => handleSelectChange('status', e.target.value)}
-            className="form-input"
-          >
-            <option value="">вибери статус</option>
-            {statusOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+          <Select
+            value={statusOptions.find((opt) => opt.value === status)}
+            onChange={(option) => handleSelectChange('status', option)}
+            options={statusOptions}
+            styles={customSelectStyles}
+            placeholder="вибери статус"
+            className="form-select"
+            isClearable
+            menuPlacement="top"
+          />
         </div>
 
         <button
@@ -151,4 +155,4 @@ const MilitaryForm = () => {
   );
 };
 
-export default MilitaryForm;
+export default Peremishchennia;
