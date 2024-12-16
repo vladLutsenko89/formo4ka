@@ -1,8 +1,3 @@
-:root {
-    --header-height: 10vh;
-    --footer-height: 10vh;
-}
-
 .layout {
     min-height: 100vh;
     display: flex;
@@ -14,10 +9,11 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 72rem;
-    margin: 0 auto;
     padding: 2rem 1rem;
+    height: var(--content-height);
+    width: 100%;
+    max-width: 90vw;
+    margin: 0 auto;
 }
 
 .main-nav {

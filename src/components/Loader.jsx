@@ -1,12 +1,12 @@
 import React from 'react';
 import '../styles/Loader.css';
 
-const Loader = () => (
-  <div className="loader-container">
-    <div className="military-loader">
-      <div className="loader-star"></div>
+const Loader = () => {
+  return (
+    <div className="loader-overlay">
+      <div className="loader"></div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Loader;

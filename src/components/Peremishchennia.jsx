@@ -29,6 +29,8 @@ const Peremishchennia = () => {
     dispatch(resetForm());
   }, [dispatch]);
 
+  useEffect(() => {}, [isLoading]);
+
   const handleInputChange = (value) => {
     dispatch(updateInput(value));
   };
@@ -53,29 +55,27 @@ const Peremishchennia = () => {
         .map((line) => line.trim())
         .filter((line) => !!line.length);
 
-      console.log('Data array:', ipns, place, status);
-
       requestResult = await axios.put(SERVER_URL, {
         ipns,
         place,
         status,
       });
 
-      console.log('requestResult -----------> ', requestResult);
-
       dispatch(
         setResult({
           success: true,
-          message: _.get(requestResult, 'message'),
+          message: _.get(requestResult, 'data.message', 'Успіх'),
         }),
       );
     } catch (error) {
-      console.log('Setting error result');
       dispatch(
         setResult({
           success: false,
-          message:
-            _.get(requestResult, 'message') || 'Помилка виконання операції',
+          message: _.get(
+            requestResult,
+            'data.message',
+            'Помилка виконання операції',
+          ),
         }),
       );
     } finally {
@@ -85,72 +85,74 @@ const Peremishchennia = () => {
 
   const isSubmitDisabled = !input.trim() || (!place && !status);
 
+  const renderModal = () => (
+    <>
+      <div className="modal-overlay" />
+      <div className={`result-modal ${result.success ? 'success' : 'error'}`}>
+        <div className="result-content">
+          <h3>{result.success ? 'Успіх' : 'Помилка'}</h3>
+          <p>{result.message}</p>
+          <button onClick={handleCloseModal}>Закрити</button>
+        </div>
+      </div>
+    </>
+  );
+
+  const renderForm = () => (
+    <form onSubmit={handleSubmit} className="military-form">
+      <h2 className="form-title">Переміщення</h2>
+
+      <div className="form-group">
+        <textarea
+          value={input}
+          onChange={(e) => handleInputChange(e.target.value)}
+          className="form-input form-textarea"
+          placeholder="кидай ІПНки сюди (кожен запис з нового рядка)"
+          rows="10"
+        />
+      </div>
+
+      <div className="form-group">
+        <Select
+          value={placeOptions.find((opt) => opt.value === place) || ''}
+          onChange={(option) => handleSelectChange('place', option)}
+          options={placeOptions}
+          styles={customSelectStyles}
+          placeholder="вибери місце знаходження"
+          className="form-select"
+          isClearable
+          menuPlacement="top"
+        />
+      </div>
+
+      <div className="form-group">
+        <Select
+          value={statusOptions.find((opt) => opt.value === status) || ''}
+          onChange={(option) => handleSelectChange('status', option)}
+          options={statusOptions}
+          styles={customSelectStyles}
+          placeholder="вибери статус"
+          className="form-select"
+          isClearable
+          menuPlacement="top"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className={`submit-button ${isSubmitDisabled ? 'disabled' : ''}`}
+        disabled={isSubmitDisabled}
+      >
+        Поїхали
+      </button>
+    </form>
+  );
+
   return (
     <div className="form-container">
       {isLoading && <Loader />}
-
-      {result.show && (
-        <>
-          <div className="modal-overlay" />
-          <div
-            className={`result-modal ${result.success ? 'success' : 'error'}`}
-          >
-            <div className="result-content">
-              <h3>{result.success ? 'Успіх' : 'Помилка'}</h3>
-              <p>{result.message}</p>
-              <button onClick={handleCloseModal}>Закрити</button>
-            </div>
-          </div>
-        </>
-      )}
-
-      <form onSubmit={handleSubmit} className="military-form">
-        <h2 className="form-title">Переміщення</h2>
-
-        <div className="form-group">
-          <textarea
-            value={input}
-            onChange={(e) => handleInputChange(e.target.value)}
-            className="form-input form-textarea"
-            placeholder="кидай ІПНки сюди (кожен запис з нового рядка)"
-            rows="10"
-          />
-        </div>
-
-        <div className="form-group">
-          <Select
-            value={placeOptions.find((opt) => opt.value === place)}
-            onChange={(option) => handleSelectChange('place', option)}
-            options={placeOptions}
-            styles={customSelectStyles}
-            placeholder="вибери місце знаходження"
-            className="form-select"
-            isClearable
-            menuPlacement="top"
-          />
-        </div>
-
-        <div className="form-group">
-          <Select
-            value={statusOptions.find((opt) => opt.value === status)}
-            onChange={(option) => handleSelectChange('status', option)}
-            options={statusOptions}
-            styles={customSelectStyles}
-            placeholder="вибери статус"
-            className="form-select"
-            isClearable
-            menuPlacement="top"
-          />
-        </div>
-
-        <button
-          type="submit"
-          className={`submit-button ${isSubmitDisabled ? 'disabled' : ''}`}
-          disabled={isSubmitDisabled}
-        >
-          Поїхали
-        </button>
-      </form>
+      {result.show && renderModal()}
+      {renderForm()}
     </div>
   );
 };

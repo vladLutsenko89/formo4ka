@@ -1,37 +1,41 @@
 .form-container {
-    height: calc(100vh - var(--header-height) - var(--footer-height));
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
     background-color: #1f2937;
+    padding: 2vh 2vw;
 }
 
 .military-form {
     background-color: #111827;
-    padding: 32px;
+    padding: 3vh 2vw;
     border-radius: 8px;
     border: 2px solid #2D5E3D;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 448px;
-    box-sizing: border-box;
+    max-width: 40vw;
+    max-height: 90%;
+    overflow-y: auto;
 }
 
 .form-group {
-    margin-bottom: 24px;
+    margin-bottom: 2vh;
     width: 100%;
-    color: #9ca3af
 }
 
 .form-title {
     color: #2D5E3D;
-    font-size: 24px;
+    font-size: 2.5vh;
     font-weight: bold;
-    margin-bottom: 24px;
+    margin-bottom: 2vh;
     text-transform: uppercase;
     letter-spacing: 0.8px;
     text-align: center;
+}
+
+.form-textarea {
+    height: 25vh;
+    resize: none;
 }
 
 .input-group {
@@ -60,11 +64,6 @@
     outline: none;
     border-color: #2D5E3D;
     opacity: 0.75;
-}
-
-.form-textarea {
-    min-height: 150px;
-    resize: vertical;
 }
 
 .form-select {

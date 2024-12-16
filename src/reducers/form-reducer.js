@@ -36,10 +36,16 @@ export const formSlice = createSlice({
     hideResult: (state) => {
       state.result.show = false;
     },
-    resetForm: () => {
-      return {
-        ...initialState,
-        result: { ...initialState.result },
+    resetForm: (state) => {
+      // Оновлений спосіб скидання форми
+      state.input = initialState.input;
+      state.place = initialState.place;
+      state.status = initialState.status;
+      state.isLoading = initialState.isLoading;
+      state.result = {
+        show: initialState.result.show,
+        success: initialState.result.success,
+        message: initialState.result.message,
       };
     },
   },

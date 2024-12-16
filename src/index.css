@@ -12,6 +12,12 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+:root {
+    --header-height: 10vh;
+    --footer-height: 8vh;
+    --content-height: 84vh;
+}
+
 ::-webkit-scrollbar {
     width: 8px;
 }

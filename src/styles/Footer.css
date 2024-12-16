@@ -1,4 +1,5 @@
 .footer {
+    height: var(--footer-height);
     background-color: #111827;
     color: #d1d5db;
     padding: 1rem 0;
